@@ -1,0 +1,77 @@
+
+
+	
+
+variable array of words 
+variable array of guessed letters
+
+
+start with random variable number and store data assigned number output.
+
+decisions:
+	letter guessed before 
+			compare against guess input variable 
+				if already guessed warn and ask for next guess
+				if not guessed then	
+					compare guess to word:
+						letter in word? 
+							yes
+								word complete?
+								yes - win
+							no - guess again? 
+									if guesses greater then 12
+									if guesses == 0 and no match user loses
+win - if word string nut matches 
+
+									
+						
+						letter not in word 
+	
+user guess to solve
+	word solved? word compare true  
+			word compare false	
+
+user win:	
+	string compare to word true match
+
+user loses
+	out of guesses and word not complete
+
+
+
+	
+
+
+guesses:  
+
+	allow guess if guesses still greater then zero:
+	guesses and decrements-
+			
+			no decrement if 
+				right guess
+				or wrong guess guessed before
+
+			decrement 
+				if no match to word.  count to counter variable 
+				if guessCounter == 0 && string less then string length 								lose 
+									on lose reset guessCounter 
+									clear guesses
+									select new word 
+							
+
+win 	
+	word completed : before guesses run out
+lose 
+	word not completed and guesses run out. 
+
+after each guess
+	offer to user to solve or guess 
+			if user chooses solve 
+				input word compared to stored word
+					if match to secret word- user wins and win message put to screen
+					if if not a match and guesses still greater then allocated guesses ask for user for next guess
+					
+			user solves word 
+			user selects to guess 																						
+				
+		
