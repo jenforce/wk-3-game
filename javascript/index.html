@@ -1,35 +1,154 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Rock Paper Scissors Part 1</title>
+<title>Hangman</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <link href="../css/style.css" rel="stylesheet" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script src="https://code.jquery.com/jquery-2.2.3.js" integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4=" crossorigin="anonymous"></script>
 </head>
 <body>
+ <div class="container fnttxt">
+	<div class="header">
+		<div class="row">
+      		<div class= "col-xs-12 col-md-12">  
+      		<h1>Hangman</h1>
+			 </div>
+			 </div>
+			</div>
 
-<!-- This is where the code will go that we created. -->
-<div id="park">
-	<p>park capture</p>
+
+	<div class="midrow1">
+		<div class="row">
+			<div class="col-xs-12 col-md-12">  
+				<div class="guessstyle">
+				<div id="gameboxes"></div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 col-md-12">  
+				<div class="guessstyle">
+				<div class="txtsizeor"> Wrong guesses:</div>
+				<div id="wrongguesses"></div>
+				</div>
+			</div>
+		</div>
+		</div>
+
+	<div class="win">
+			<div>WINS:</div>
+				<div id="wins"></div>
+	</div>
+	<div class="loss">
+			<div>LOSSES:</div>
+				<div id="losses"></div>
+	</div>
+
 </div>
+<div class="footer">
+	
+</div>
+<script type = "text/javascript"> 
+$(document).ready(function() {
+    //parks list
+    var parkChoices = ['denali', 'glacier bay', 'grand canyon',
+        'petrified forest', 'saguaro', 'arkansas hot springs',
+        'channel islands', 'death valley', 'joshua tree',
+        'kings canyon', 'redwood', 'sequoia', 'yosemite',
+        'great sand dunes', 'mesa verde', 'rocky mountain',
+        'biscayne', 'dry tortugas', 'everglades', 'yellowstone',
+        'acadia', 'glacier', 'great basin', 'carlsbad caverns',
+        'cuyahoga valley', 'crater lake', 'badlands',
+        'great smoky mountains', 'big bend', 'guadalupe mountains',
+        'virgin islands', 'arches', 'bryce canyon', 'capitol reef',
+        'canyonlands', 'zion', 'shenandoah', 'mount rainier',
+        'north cascades', 'olympic', 'grand teton'
+    ];
+    console.log(parkChoices.length); //cofirm array 
+    var computerGuess;
+    var userGuessMatched = [];
+    var userGuessNoMatch = [];
+    var boxes = [];
+    //var boxes;	
+    var matched;
+    var userGuess;
+    var tries = 0;
+    var losses = 0;
+    var wins = 0;
+    var computerGuess = parkChoices[Math.floor(Math.random() *
+        parkChoices.length)];
+    console.log('computerGuess ' + computerGuess);
+    for (var i = 0; i < computerGuess.length; i++) {
+        boxes.push('_');
+        console.log('boxes' + boxes);
+    };
+    var gamesBoxesElement = document.getElementById('gameboxes');
+    gamesBoxesElement.innerHTML = boxes.join(' ');
+    //user inputs guess//
+    document.onkeyup = function(event) {
+        userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+        console.log('userGuess ' + userGuess);
+        //in word?
+        if ([computerGuess.indexOf(userGuess)] == -1) {
+            console.log('not matched');
+            //if in word,already guessed?
+            if ([userGuessNoMatch.indexOf(userGuess)] == -1) {
+                userGuessNoMatch.push(userGuess);
+                console.log('add to userGuessNoMatch' +
+                    userGuessNoMatch);
+                document.getElementById("wrongguesses").innerHTML =
+                    userGuessNoMatch.join(' ');
+                tries++;
+                console.log('1 tries = ' + tries);
+                if (tries > 2) {
+                    console.log('calling lose function');
+                    lose();
+                }
+            } else {
+                console.log(
+                    'Opps! Already Guessed, Guess again Thanks!'
+                )
+            }
+        } else {
+            console.log('matched');
+            for (var i = 0; i < computerGuess.length; i++) {
+                var computerLetter = computerGuess[i];
+                if (computerLetter == userGuess) {
+                    boxes[i] = computerLetter;
+                }
+            };
+            gamesBoxesElement.innerHTML = boxes.join(' ');
+            if (boxes.indexOf('_') == -1) {
+                //win game logc
+                wins++;
+                console.log('you won');
+                document.getElementById("wins").innerHTML = wins;
+                playagain();
+            }
+        }
+    };
 
-<script type="text/javascript">
-//parks list
-var parkChoices = ['Denali', 'Glacier Bay','Grand Canyon','Petrified Forest','Saguaro','Arkansas Hot Springs','Channel Islands','Death Valley','Joshua Tree','Kings Canyon','Redwood','Sequoia','Yosemite','Great Sand Dunes','Mesa Verde','Rocky Mountain','Biscayne','Dry Tortugas','Everglades','Yellowstone','Acadia','Glacier','Yellowstone','Great Basin','Carlsbad Caverns','Great Smoky Mountains','Cuyahoga Valley','Crater Lake','Badlands','Great Smoky Mountains','Big Bend','Guadalupe Mountains','Virgin Islands','Arches','Bryce Canyon','Capitol Reef','Canyonlands','Zion','Shenandoah','Mount Rainier','North Cascades','Olympic','Grand Teton','Yellowstone'];
+    function lose() {
+        console.log('sorry you lost play again?');
+        losses++;
+        document.getElementById("losses").innerHTML = losses;
+        playagain();
+    };
 
-	console.log(parkChoices.length);
-//computer generates random word//
-
-var computerGuess = parkChoices[Math.floor(Math.random() * parkChoices.length)];
-
-						console.log(computerGuess);
-
-//user inputs guess//
-var letterGuess = [
-document.onkeyup = function(event) {
-	var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
-	console.log(userGuess);
-	}
-];
-console.log(letterGuess.length);
-
+    function playagain() {
+        var playagain = confirm("Play Again?");
+        if (playagain == true) {
+            userGuessMatched = [];
+            userGuessNoMatch = [];
+            tires = 0;
+        } else {
+            document.write("Thanks for Playing");
+        }
+    };
+})
 
 </script>
 </body>

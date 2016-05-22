@@ -1,0 +1,73 @@
+
+
+.container{
+  margin: 0 auto;
+  min-height: calc(100vh - 40px);
+  /*border:solid red;*/
+ 
+}
+
+
+.header{
+  height:80px;
+  background-color: grey;
+  color:white;
+  padding-left: 40px;
+  /*border:solid pink;*/
+  
+}
+
+.fnttxt{
+font-family: Arial, Times;
+
+}
+.midrow1{
+background-image: url("../images/phx2.png"); 
+height: 450px;
+color:white;
+}
+ 
+
+.win{
+  height:60px;
+  background-color: white;
+  font-size: 25px;
+  padding-bottom:50px;
+  margin:50px;
+  float:left;
+}
+
+.loss{
+  height:60px;
+  background-color: white;
+  font-size: 25px;
+  padding-bottom:50px;
+
+  margin:50px;
+
+}
+.txtsizeor{
+ font-size: 25px; 
+}
+
+
+.guessstyle{
+  height: 100px;
+  font-size: 50px;
+  padding:100px;
+  color:white;
+}
+
+.label{
+  font-size: 50px;
+  border: green solid;
+}
+
+.footer{
+background-color: grey;
+height:40px;
+color: e1e0d8;
+/*border:solid yellow;*/
+width: 1140px;
+margin: 0 auto;
+}
